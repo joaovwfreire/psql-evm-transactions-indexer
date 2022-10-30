@@ -1,42 +1,45 @@
-Block Indexing tool.
+# Block Indexing tool
 This tool uses Alchemy's apis and cost about 5.6 M computting units per month. 10 CU for eth.getBlock and 16 CU for eth.getBlockTransactions every 12 seconds.
 Fetches blocks and it's transactions. Posts the data to a PostgreSQL database. 
 
 
-How to get started
+## How to get started:
 
           
     git clone https://github.com/joaovwfreire/psql-evm-transactions-indexer
     cd psql-evm-transactions-indexer
     yarn install
     
-    setup a PSQL database and place it's data at a .env file.
-        PG_HOST=x
-        PG_PORT=x
-        PG_USER=x
-        PG_PASSWORD=x
-        PG_DATABASE=x    
+### Setup a PSQL database and place it's data at a .env file.
+
+    PG_HOST=x
+    PG_PORT=x
+    PG_USER=x
+    PG_PASSWORD=x
+    PG_DATABASE=x    
         
-    place your Alchemy's api key at the .env file
-        ALCHEMY_API_KEY=x  
+### Place your Alchemy's api key at the .env file
 
-    Run the following command to start indexing blocks:
-        pm2 start scripts/blockCatcher.js
+    ALCHEMY_API_KEY=x  
 
-    Monitor memory and cpu usage: (usually runs between 40mb - 60mb ram and 0% cpu)
-    	pm2 list
+### Run the following command to start indexing blocks:
 
-    To log the block number and the amount of transaction rows inserted
-        pm2 logs 
+    pm2 start scripts/blockCatcher.js
+
+### Monitor memory and cpu usage: (usually runs between 40mb - 60mb ram and 0% cpu)
+
+    pm2 list
+
+### To log the block number and the amount of transaction rows inserted
+
+     pm2 logs 
        
     
 
 
-Postgre's tables were built with the following commands:
+### Postgres commands:
 
- Tables 
-
-   transactions 
+  #### transactions: 
         
         CREATE TABLE transactions
         (
@@ -61,7 +64,7 @@ Postgre's tables were built with the following commands:
             chainid integer not null
         );
 
-Row insertion
+#### Row insertion
 
     transactions
         INSERT INTO transactions
@@ -71,8 +74,11 @@ Row insertion
     The data variable is the block.transactions array of transaction objects reformatted into a string to fit PSQL commands. 
 
 
-Further improvements:
-    Nest.js api for JWT-based access control
-    
-    Block snapshots
+## Further improvements:
+- [ ] Nest.js api for JWT-based access control
+- [ ] Block snapshots
+- [ ] Efficient catches for older blocks.
+- [ ] Alchemy API usage optimization.
+- [ ] Block indexing.
+
 
