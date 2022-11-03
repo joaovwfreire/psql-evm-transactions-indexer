@@ -75,8 +75,9 @@ Fetches blocks and it's transactions. Posts the data to a PostgreSQL database.
 
 
 ## Further improvements:
-- [ ] Nest.js api for JWT-based access control
-- [ ] Block snapshots
+- [x] Next.js application
+- [ ] Next.js JWT-based access control
+- [ ] Block snapshots - backend and smart contract.
 - [ ] Efficient catches for older blocks.
 - [ ] Alchemy API usage optimization.
 - [ ] Block indexing.
