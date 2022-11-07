@@ -1,21 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&family=Varela+Round&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    background-image: linear-gradient(150deg, hsla(214, 83%, 7%, 0.977), hsla(288, 94%, 20%, 0.977));
+  font-family: 'Varela Round', sans-serif !important;
+    background-image: linear-gradient(150deg,  hsla(170, 100%, 35%, 0.977), hsla(246, 98%, 25%, 0.977), hsla(0, 93%, 44%, 0.977));
     background-size: 500% 500%;
-	-webkit-animation: gradient 8s ease infinite;
-	        animation: gradient 8s ease infinite;
+	-webkit-animation: gradient 30s ease infinite;
+	        animation: gradient 30s ease infinite;
 	height: 100vh;
+  
 }
 body:hover{
 
-    -webkit-animation: gradient 8s ease infinite;
-    animation: gradient 8s ease infinite;
+    -webkit-animation: gradient 30s ease infinite;
+    animation: gradient 30s ease infinite;
  
 }
+
+h2, h3{
+  font-family: 'Pacifico', sans-serif !important;
+}
+
 
 @-webkit-keyframes gradient {
 	0% {
@@ -161,3 +168,18 @@ a {
 }
 
 
+.shadowmenu{
+  box-shadow: 7px 7px #030f1f;
+  position: relative;
+}
+
+.shadowmenu:hover{
+  top: 1px;
+  left: 1px;
+
+}
+
+#titlecontainer{
+  margin-top: 25vh;
+  min-height: 45vh;
+}
