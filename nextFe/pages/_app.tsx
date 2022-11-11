@@ -6,6 +6,8 @@ import { RainbowKitProvider, getDefaultWallets } from '@rainbow-me/rainbowkit';
 import { chain, configureChains, createClient, WagmiConfig } from 'wagmi';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
+import { SessionProvider } from "next-auth/react"
+import type { Session } from "next-auth"
 import { useEffect } from 'react';
 
 const { chains, provider, webSocketProvider } = configureChains(
@@ -40,16 +42,20 @@ const wagmiClient = createClient({
   webSocketProvider,
 });
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps }, }: AppProps<{ session: Session }>) {
   useEffect(() => {
     require("bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);
+  
   return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
-        <Component {...pageProps} />
-      </RainbowKitProvider>
-    </WagmiConfig>
+    <SessionProvider session={session}>
+      <WagmiConfig client={wagmiClient}>
+        <RainbowKitProvider chains={chains}>
+          <Component {...pageProps} />
+        </RainbowKitProvider>
+      </WagmiConfig>
+    </SessionProvider>
+      
   );
 }
 

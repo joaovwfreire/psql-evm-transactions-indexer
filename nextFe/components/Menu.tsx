@@ -1,11 +1,18 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { signIn, signOut, useSession } from "next-auth/react"
 import Link from "next/link";
 import Image from "next/image";
 import Lollipop from '../images/lollipop.png';
+import styles from "./Menu.module.css"
 
 const Menu = () =>{
+  const { data: session, status } = useSession()
+  const loading = status === "loading"
+
     return(
       <nav className="navbar fixed-top navbar-inverse navbar-expand-lg navbar-light border-bottom " id='navbar'>
+        
+      
       <div className="container-fluid">
         <h2 className="navbar-brand mt-3 text-white" ><b> LolliBlocks </b></h2>
         <Image 
@@ -24,19 +31,19 @@ const Menu = () =>{
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
       
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item ">
+            <li className="nav-item m-1 ">
               <a className="nav-link shadowmenu rounded-3  btn btn-light mt-1 mx-2 text-black" aria-current="page" href="/"><b>Home</b></a>
             </li>
-            <li className="nav-item  ">
+            <li className="nav-item m-1  ">
               <a className="nav-link shadowmenu rounded-3 btn btn-light  mt-1 mx-2 text-black" href="/user"><b>User</b></a>
             </li>
-            <li className="nav-item  ">
+            <li className="nav-item m-1  ">
               <a className="nav-link shadowmenu rounded-3 btn btn-light  mt-1 mx-2 text-black" href="/currentblock"><b>Current Block</b></a>
             </li>
-            <li className="nav-item  ">
+            <li className="nav-item m-1  ">
               <a className="nav-link shadowmenu rounded-3 btn btn-light  mt-1 mx-2 text-black" href="#"><b>Snapshots</b></a>
             </li>
-            <li className="nav-item dropdown">
+            <li className="nav-item m-1  dropdown">
               <a className="nav-link shadowmenu rounded-3 dropdown-toggle btn btn-light mt-1 mx-2 text-black" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <b>Premium</b>
               </a>
@@ -47,9 +54,59 @@ const Menu = () =>{
                 <li><a className="dropdown-item hoverable" href="#">Ipsum Lorem</a></li>
               </ul>
             </li>
+            <li className="nav-item  m-1  ">
+          <div
+          
+        >
+          {!session && (
+            <>
+              
+              <a
+                href={`/api/auth/signin`}
+                className={`nav-link shadowmenu rounded-3 btn btn-light  mt-1 mx-2 text-black `}
+                onClick={(e) => {
+                  e.preventDefault()
+                  signIn()
+                }}
+              >
+                <b>Sign in</b>
+              </a>
+            </>
+          )}
+          {session?.user && (
+            <>
+              {session.user.image && (
+                <span
+                  style={{ backgroundImage: `url('${session.user.image}')` }}
+                  className={`${styles.avatar} `}
+                />
+              )}
+              <span className="mx-2 d-inline-block">
+                <small className="text-white">Signed in as</small>
+                <br/>
+                <strong className="text-white ">{session.user.email ?? session.user.name}</strong>
+                <a
+                href={`/api/auth/signout`}
+                
+                onClick={(e) => {
+                  e.preventDefault()
+                  signOut()
+                }}
+              >
+                <b className={` shadowmenu rounded-3 btn btn-light mx-2 pb-1 fw-bold`}>Sign out</b>
+              </a>
+              </span>
+
+            </>
+          )}
+        </div>
+          </li>
+
     
           </ul>
+          
           <ConnectButton />
+          
         </div>
       </div>
     </nav>
