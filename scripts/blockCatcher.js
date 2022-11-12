@@ -1,6 +1,8 @@
 const { ethers } = require("ethers");
 require('dotenv').config()
 const { newData } = require('../add-data');
+
+
 async function main() {
   const provider = new ethers.providers.AlchemyProvider('goerli', process.env.ALCHEMY_API_KEY);
 

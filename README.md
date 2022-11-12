@@ -73,6 +73,10 @@ Fetches blocks and it's transactions. Posts the data to a PostgreSQL database.
 
     The data variable is the block.transactions array of transaction objects reformatted into a string to fit PSQL commands. 
 
+#### Old blocks
+
+    The simple ethers.js script picks 130 blocks per minute, which is far from ideal. 
+
 
 ## Further improvements:
 - [x] Next.js application
