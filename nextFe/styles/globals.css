@@ -5,10 +5,10 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Varela Round', sans-serif !important;
-    background-image: linear-gradient(150deg,  hsla(170, 100%, 35%, 0.977), hsla(246, 98%, 25%, 0.977), hsla(0, 93%, 44%, 0.977));
+    background-image:linear-gradient(150deg, rgba(243, 7, 7), rgb(255, 255, 255));
     background-size: 500% 500%;
-	-webkit-animation: gradient 30s ease infinite;
-	        animation: gradient 30s ease infinite;
+	-webkit-animation: gradient 40s ease infinite;
+	        animation: gradient 40s ease infinite;
 	height: 100vh;
   
 }
@@ -167,19 +167,78 @@ a {
   animation-duration: 2s;
 }
 
+.main-text{
+  font-size: 120px;
+  
+  background: repeating-linear-gradient(
+    to right,
+    rgb(255, 255, 255), 
+    rgba(243, 7, 7, 0.719)
+ 
+    
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  background-size: 500% 500%;
+	-webkit-animation: gradient 30s ease infinite;
+	        animation: gradient 30s ease infinite;
+
+}
+
+.main-text-menu{
+  font-size: 120px;
+  
+  background: linear-gradient(
+    to right,
+    #fff, 
+    rgba(243, 7, 7, 0.719),
+    #fff,
+    #fff,
+    #fff
+ 
+    
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  background-size: 500% 500%;
+	-webkit-animation: gradient 20s ease infinite;
+	        animation: gradient 20s ease infinite;
+
+}
+
 
 .shadowmenu{
-  box-shadow: 7px 7px #030f1f;
+  
+  box-shadow: 3px 3px #bcd805;
   position: relative;
+  color:rgb(255, 255, 255)
 }
 
 .shadowmenu:hover{
-  top: 1px;
+  top: 2px;
   left: 1px;
+  box-shadow: 3px 3px #fbeb05;
+ 
 
 }
+
 
 #titlecontainer{
   margin-top: 25vh;
   min-height: 45vh;
 }
+
+.navbar-custom-bg{
+  background-color: rgba(243, 7, 7, 0.719);
+ }
+
+.card-css-t{
+  background-image: linear-gradient(90deg, rgba(192, 187, 187, 0.5), rgba(240, 236, 236, 0.5));
+  box-shadow: 3px 3px rgba(243, 7, 7, 0.719);
+  position: relative;
+  color:rgb(255, 255, 255)
+
+}
+

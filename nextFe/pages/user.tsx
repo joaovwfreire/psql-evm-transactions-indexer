@@ -6,6 +6,7 @@ import { JSXElementConstructor, ReactElement, ReactFragment, ReactPortal, useEff
 import styles from '../styles/Home.module.css';
 import axios from 'axios'
 import Menu from '../components/Menu';
+import Footer from '../components/Footer';
 const { ethers } = require("ethers");
 
 const Home: NextPage = () => {
@@ -69,11 +70,7 @@ const Home: NextPage = () => {
         
       </main>
 
-      <footer className={styles.footer}>
-        <a href="https://rainbow.me" target="_blank" rel="noopener noreferrer">
-          Made with ❤️ by your frens at 🌈
-        </a>
-      </footer>
+      <Footer/>
     </div>
   );
 };

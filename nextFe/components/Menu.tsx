@@ -10,11 +10,11 @@ const Menu = () =>{
   const loading = status === "loading"
 
     return(
-      <nav className="navbar fixed-top navbar-inverse navbar-expand-lg navbar-light border-bottom " id='navbar'>
+      <nav className="navbar fixed-top navbar-inverse navbar-expand-lg navbar-light border-bottom  navbar-custom-bg" id='navbar'>
         
       
       <div className="container-fluid">
-        <h2 className="navbar-brand mt-3 text-white" ><b> LolliBlocks </b></h2>
+        <h2 className="navbar-brand mt-3 main-text-menu " ><b> LolliBlocks </b></h2>
         <Image 
         src={Lollipop}
         width = {50}
@@ -32,29 +32,28 @@ const Menu = () =>{
       
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item m-1 ">
-              <a className="nav-link shadowmenu rounded-3  btn btn-light mt-1 mx-2 text-black" aria-current="page" href="/"><b>Home</b></a>
+              <a className="nav-link border-danger shadowmenu rounded-0 btn btn-light mx-2 text-black" aria-current="page" href="/"><b>Home</b></a>
             </li>
             <li className="nav-item m-1  ">
-              <a className="nav-link shadowmenu rounded-3 btn btn-light  mt-1 mx-2 text-black" href="/user"><b>User</b></a>
+              <a className="nav-link border-danger shadowmenu rounded-0 btn btn-light   mx-2 text-black" href="/user"><b>User</b></a>
             </li>
             <li className="nav-item m-1  ">
-              <a className="nav-link shadowmenu rounded-3 btn btn-light  mt-1 mx-2 text-black" href="/currentblock"><b>Current Block</b></a>
+              <a className="nav-link border-danger shadowmenu rounded-0 btn btn-light   mx-2 text-black" href="/currentblock"><b>Current Block</b></a>
             </li>
             <li className="nav-item m-1  ">
-              <a className="nav-link shadowmenu rounded-3 btn btn-light  mt-1 mx-2 text-black" href="#"><b>Snapshots</b></a>
+              <a className="nav-link border-danger shadowmenu rounded-0 btn btn-light  mx-2 text-black" href="#"><b>Snapshots</b></a>
             </li>
             <li className="nav-item m-1  dropdown">
-              <a className="nav-link shadowmenu rounded-3 dropdown-toggle btn btn-light mt-1 mx-2 text-black" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a className="nav-link border-danger shadowmenu rounded-0 dropdown-toggle btn btn-light  mx-2 text-black" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <b>Premium</b>
               </a>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a className="dropdown-item hoverable" href="#">Lorem</a></li>
-                <li><a className="dropdown-item" href="#">Ipsum</a></li>
-                <li><hr className="dropdown-divider"/></li>
-                <li><a className="dropdown-item hoverable" href="#">Ipsum Lorem</a></li>
+              <ul className="dropdown-menu bg-danger" aria-labelledby="navbarDropdown">
+                <li><a className="nav-link border-danger shadowmenu rounded-0 btn btn-light  mx-2 text-black mt-2" href="#"><b>Lorem</b></a></li>
+                <li><a className="nav-link border-danger shadowmenu rounded-0 btn btn-light  mx-2 text-black mt-1 mb-2" href="#"><b>Ipsum</b></a></li>
+
               </ul>
             </li>
-            <li className="nav-item  m-1  ">
+            <li className="nav-item  mt-1 ">
           <div
           
         >
@@ -63,7 +62,7 @@ const Menu = () =>{
               
               <a
                 href={`/api/auth/signin`}
-                className={`nav-link shadowmenu rounded-3 btn btn-light  mt-1 mx-2 text-black `}
+                className={`nav-link border-danger shadowmenu rounded-0 btn btn-light   mx-2 text-black `}
                 onClick={(e) => {
                   e.preventDefault()
                   signIn()
@@ -78,13 +77,11 @@ const Menu = () =>{
               {session.user.image && (
                 <span
                   style={{ backgroundImage: `url('${session.user.image}')` }}
-                  className={`${styles.avatar} `}
+                  className={`${styles.avatar} mx-4`}
                 />
               )}
-              <span className="mx-2 d-inline-block">
-                <small className="text-white">Signed in as</small>
-                <br/>
-                <strong className="text-white ">{session.user.email ?? session.user.name}</strong>
+              <span className="mx-2 mt-1  d-inline-block">
+            
                 <a
                 href={`/api/auth/signout`}
                 
@@ -93,7 +90,7 @@ const Menu = () =>{
                   signOut()
                 }}
               >
-                <b className={` shadowmenu rounded-3 btn btn-light mx-2 pb-1 fw-bold`}>Sign out</b>
+                <b className={` border-danger shadowmenu rounded-0 btn btn-light fw-bold`}>Sign out</b>
               </a>
               </span>
 
@@ -105,7 +102,101 @@ const Menu = () =>{
     
           </ul>
           
-          <ConnectButton />
+          <ConnectButton.Custom>
+      {({
+        account,
+        chain,
+        openAccountModal,
+        openChainModal,
+        openConnectModal,
+        authenticationStatus,
+        mounted,
+      }) => {
+        // Note: If your app doesn't use authentication, you
+        // can remove all 'authenticationStatus' checks
+        const ready = mounted && authenticationStatus !== 'loading';
+        const connected =
+          ready &&
+          account &&
+          chain &&
+          (!authenticationStatus ||
+            authenticationStatus === 'authenticated');
+
+        return (
+          <div
+            {...(!ready && {
+              'aria-hidden': true,
+              'style': {
+                opacity: 0,
+                pointerEvents: 'none',
+                userSelect: 'none',
+              },
+            })}
+          >
+            {(() => {
+              if (!connected) {
+                return (
+                  <button onClick={openConnectModal} className='border-danger shadowmenu rounded-0 btn btn-light mx-3 pb-1 fw-bold'>
+                    Connect Wallet
+                  </button>
+                );
+              }
+
+              if (chain.unsupported) {
+                return (
+                  <button onClick={openChainModal}  className='border-danger shadowmenu rounded-0 btn btn-light mx-3 pb-1 fw-bold'>
+                    Wrong network
+                  </button>
+                );
+              }
+
+              return (
+                <div style={{ display: 'flex', gap: 12 }}>
+                  <button
+                    onClick={openChainModal}
+                    style={{ display: 'flex', alignItems: 'center' }}
+                    type="button"
+                    className='border-danger shadowmenu rounded-0 btn btn-light mx-3 pb-1 fw-bold'
+                  >
+                    {chain.hasIcon && (
+                      <div
+                        style={{
+                          background: chain.iconBackground,
+                          width: 24,
+                          height: 24,
+                          borderRadius: 999,
+                          overflow: 'hidden',
+                          marginRight: 4,
+                        }}
+                      >
+                        {chain.iconUrl && (
+                          <Image
+                            alt={chain.name ?? 'Chain icon'}
+                            src={chain.iconUrl}
+                            style={{ width: 24, height: 24 }}
+                            width={24}
+                            height={24}
+                          />
+                        )}
+                      </div>
+                    )}
+                    {chain.name}
+                  </button>
+
+                  <button onClick={openAccountModal} type="button" className='border-danger shadowmenu rounded-0 btn btn-light mx-2 pb-1 fw-bold '>
+                    {account.displayName}
+                    {account.displayBalance
+                      ? ` (${account.displayBalance})`
+                      : ''}
+                      
+                  </button>
+                </div>
+              );
+            })()}
+          </div>
+        );
+      }}
+    </ConnectButton.Custom>
           
         </div>
       </div>

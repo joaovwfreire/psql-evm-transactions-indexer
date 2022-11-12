@@ -23,10 +23,8 @@ export const authOptions: NextAuthOptions = {
 
   ],
   theme: {
-    colorScheme: "light",
-    brandColor: "BAE0E9", // Hex color code
-  logo: "../lollipop.png", // Absolute URL to image
-  buttonText: "asca" // Hex color code
+    colorScheme: "dark",
+ 
   },
   callbacks: {
     async jwt({ token }) {
